@@ -453,7 +453,7 @@ const Home = () => {
                 href="/"
                 className="inline-block bg-transparent text-white hover:bg-white hover:text-black px-6 py-2 rounded-md font-bold transition-all duration-300"
               >
-                Home
+                HOME
               </Link>
             </li>
             <li className="cursor-pointer py-2 px-4 md:py-0 md:px-0 text-left md:text-center">
@@ -477,7 +477,15 @@ const Home = () => {
                 href="/technology"
                 className="inline-block bg-transparent text-white hover:bg-white hover:text-black px-2 py-2 rounded-md font-bold transition-all duration-300"
               >
-                Technology
+                TECHNOLOGY
+              </Link>
+            </li>
+            <li className="cursor-pointer py-2 px-4 md:py-0 md:px-0 text-left md:text-center">
+              <Link
+                href="/partners"
+                className="inline-block bg-transparent text-white hover:bg-white hover:text-black px-2 py-2 rounded-md font-bold transition-all duration-300"
+              >
+                PARTNERS
               </Link>
             </li>
             <li className="cursor-pointer py-2 px-4 md:py-0 md:px-0 text-left md:text-center">
@@ -504,9 +512,17 @@ const Home = () => {
                 PRIVACY POLICY
               </Link>
             </li>
-            <div className="cursor-pointer hover:text-[#F7961E] py-2 px-4 md:py-0 md:px-0 text-left md:text-center">
+            {/* <div className="cursor-pointer hover:text-[#F7961E] py-2 px-4 md:py-0 md:px-0 text-left md:text-center">
               <a
                 href="https://ulka.tv/customers/login"
+                className="inline-block bg-red-600 text-white px-6 py-2 rounded-md font-bold transition-all duration-300"
+              >
+                USER SIGN IN
+              </a>
+            </div> */}
+            <div className="cursor-pointer hover:text-[#F7961E] py-2 px-4 md:py-0 md:px-0 text-left md:text-center">
+              <a
+                href="/login"
                 className="inline-block bg-red-600 text-white px-6 py-2 rounded-md font-bold transition-all duration-300"
               >
                 USER SIGN IN
