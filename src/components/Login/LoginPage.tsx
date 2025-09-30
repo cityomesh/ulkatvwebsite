@@ -257,7 +257,7 @@ const Login = () => {
       } else {
         setError(data.message || "Invalid credentials. Please try again.");
       }
-    } catch (error) {
+     } catch {
       setError("Something went wrong. Please try again later.");
     } finally {
       setLoading(false);
@@ -317,7 +317,6 @@ const Login = () => {
 };
 
 export default Login;
-
 
 
 // "use client";
