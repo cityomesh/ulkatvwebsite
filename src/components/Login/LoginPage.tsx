@@ -353,7 +353,7 @@ const Login = () => {
       } else {
         setError("Invalid username or password. Please try again.");
       }
-    } catch (_error) {
+    } catch {
       setError("Something went wrong. Please try again later.");
     } finally {
       setLoading(false);

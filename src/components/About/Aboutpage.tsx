@@ -5,8 +5,6 @@ import { motion } from "framer-motion";
 import Link from 'next/link';
 
 const Aboutpage: React.FC = () => {
-  // Unused state and imports removed to fix ESLint warnings
-
   const testimonials = [
     {
       name: 'Enhanced Connectivity:',
@@ -16,7 +14,7 @@ const Aboutpage: React.FC = () => {
     {
       name: 'Digital Literacy and Skill Development:',
       feedback:
-        "Bundled packages encourage residents to engage with technology, leading to improved digital literacy and skills that are increasingly relevant in today's world.",
+        "Bundled packages encourage residents to engage with technology, leading to improved digital literacy and skills that are increasingly relevant in today&apos;s world.",
     },
     {
       name: 'Technology Adoption:',
@@ -62,7 +60,7 @@ const Aboutpage: React.FC = () => {
                   <div className="relative p-6">
                     {idx === 0 && (
                       <h3 className="text-xl font-semibold">
-                        ULKA TV is a leading IPTV subscription provider across India. India's 1st Solution with MPEG-DASH and HEVC codec with unicast technology which provides all Indian channels.
+                        ULKA TV is a leading IPTV subscription provider across India. India&apos;s 1st Solution with MPEG-DASH and HEVC codec with unicast technology which provides all Indian channels.
                       </h3>
                     )}
                     {idx === 1 && (
@@ -155,7 +153,7 @@ const Aboutpage: React.FC = () => {
             <hr className="border-white my-4" />
             <p className="mb-2 font-bold text-xl">BUNDLE PACKAGES TO PROMOTE INTERNET CONNECTIONS</p>
             <p className="mb-2 text-lg">
-              Offering bundled packages that include both internet connectivity and IPTV services at reasonable rates, making it more attractive for urban or rural customers since they don't have to pay separately for Television connections.
+              Offering bundled packages that include both internet connectivity and IPTV services at reasonable rates, making it more attractive for urban or rural customers since they don&apos;t have to pay separately for Television connections.
             </p>
             <hr className="border-white my-4" />
             <button

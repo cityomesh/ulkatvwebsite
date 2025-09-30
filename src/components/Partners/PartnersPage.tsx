@@ -2,15 +2,10 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { motion } from "framer-motion";
 import Link from 'next/link';
-import { FaStar } from "react-icons/fa";
 
 const HomePage: React.FC = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [highlightedCards, setHighlightedCards] = useState<boolean[]>([false, false, false, false]);
   const [selectedState, setSelectedState] = useState("Andhra Pradesh");
 
   const states = [
@@ -120,24 +115,6 @@ const HomePage: React.FC = () => {
     { src: "/gnet.png", alt: "SDC4 Logo" },
   ];
   
-  
-  const testimonials = [
-    {
-      name: 'Enhanced Connectivity:',
-      feedback:
-        "Bundled packages provide rural residents with both internet connectivity and IPTV services in a single offering. This ensures that individuals have access to information, entertainment, and services through a reliable and convenient connection.",
-    },
-    {
-      name: 'Digital Literacy and Skill Development:',
-      feedback:
-        'Bundled packages encourage residents to engage with technology, leading to improved digital literacy and skills that are increasingly relevant in today s world.',
-    },
-    {
-      name: 'Technology Adoption:',
-      feedback:
-        'Bundled packages introduce technology to rural communities, encouraging the use of Smartphones, Smart TVs, and other devices. This can have long-term benefits in terms of technology adoption and adaptation.',
-    },
-  ];
   
   return (
     <div className="mb-8 min-h-screen  mx-auto mt-[7rem]">
@@ -259,7 +236,7 @@ const HomePage: React.FC = () => {
       <div className="max-w-[95rem] mx-auto bg-white p-6 rounded-xl">
         <h2 className="text-2xl font-semibold text-center mb-4 text-[#2B1C50]">
           ULKATV Partners by State
-        </h2>Entertainment
+        </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 text-center my-8">
         {states.map((state) => (
           <button
@@ -271,7 +248,6 @@ const HomePage: React.FC = () => {
             {state}
           </button>
         ))}
-
         </div>
 
         {selectedState && (

@@ -38,12 +38,17 @@ export default function ForgotPasswordPage() {
       } else {
         setMessage(data.message || "Failed to send OTP.");
       }
-    } catch (error: any) {
-      console.error(error); // <-- Fixed ESLint error by using the variable
-      setMessage("Network error. Please try again.");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error(error.message);
+        setMessage("Network error. Please try again.");
+      } else {
+        console.error(error);
+        setMessage("An unexpected error occurred.");
+      }
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
