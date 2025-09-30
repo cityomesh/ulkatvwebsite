@@ -53,7 +53,7 @@ const BouquePage = () => {
     return stored ? JSON.parse(stored) : [];
   });
     const [searchQuery, setSearchQuery] = useState("");
-  const [showPriceDetails, setShowPriceDetails] = useState<Record<number, boolean>>({});
+  const [showPriceDetails] = useState<Record<number, boolean>>({});
   const [selectedType, setSelectedType] = useState<"Alacarte" | "Add On" | "Base">("Alacarte");
 
   // Mapping UI labels to backend values
