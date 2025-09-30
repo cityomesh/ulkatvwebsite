@@ -44,7 +44,7 @@ const Aboutpage: React.FC = () => {
 
       <div className="flex justify-center mt-8">
         <h2
-          className="font-bold text-lg sm:text-lg md:text-xl text-white bg-[#0a0f2c] py-2 px-4 sm:py-2 sm:px-6 rounded-lg shadow-lg border-2 border-transparent group duration-300 mb-8"
+          className="font-bold text-lg sm:text-lg md:text-xl text-white bg-[#0a0f2c] py-2 my-8 px-4 sm:py-2 sm:px-6 rounded-lg shadow-lg border-2 border-transparent group duration-300 mb-8"
         >
           ABOUT US
         </h2>
@@ -302,7 +302,7 @@ const Aboutpage: React.FC = () => {
           <div className="grid grid-cols-1 gap-4 w-full md:w-[43%]">
             <div className="relative h-40 w-[72%] sm:h-64 sm:w-full md:h-[32rem] md:w-[50rem] mx-auto">
               <Image
-                src="/tvweb.png"
+                src="/tvone.png"
                 alt="Family watching TV"
                 layout="fill"
                 objectFit="cover"

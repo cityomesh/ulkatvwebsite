@@ -399,24 +399,24 @@ const Home = () => {
           isScrolled ? "bg-black py-3" : "bg-black py-5"
         }`}
       >
-    {/* <div className="site-header-top-wrapper py-2 flex justify-between items-center px-4 md:px-8 lg:px-12">
+    <div className="site-header-top-wrapper py-2 flex justify-between items-center px-4 md:px-8 lg:px-12">
       <div className="flex space-x-4">
-        <a href="#" title="Facebook" className="text-blue-600 hover:text-blue-800"><FaFacebookF /></a>
-        <a href="#" title="Twitter" className="text-blue-400 hover:text-blue-600"><FaTwitter /></a>
+        <a href="#" title="Facebook" className="text-white hover:text-blue-800"><FaFacebookF /></a>
+        <a href="#" title="Twitter" className="text-white hover:text-blue-600"><FaTwitter /></a>
       </div>
       
       <div className="flex items-center space-x-2">
-        <span className="text-gray-700 font-medium hidden sm:block">FOR QUERIES? CALL:</span>
-        <a href="tel:7416410888" className="text-blue-600 font-bold hover:underline">74164 10888</a>
-        <FaPhone className="text-gray-700" />
+        <span className="text-white font-medium hidden sm:block">FOR QUERIES? CALL:</span>
+        <a href="tel:7416410888" className="text-white font-bold hover:underline">74164 10888</a>
+        <FaPhone className="text-white" />
       </div>
       
       <div className="flex items-center space-x-8 hidden sm:flex">
-        <a href="https://store.ulka.tv/" className="text-blue-700 font-medium hover:text-blue-600">STORE</a>
-        <a href="https://ulka.tv/faq" className="text-blue-700 font-medium hover:text-blue-600">F.A.Q</a>
-        <a href="https://partners.ulka.tv/" className="text-blue-700 font-medium hover:text-blue-600">PARTNER LOGIN</a>
+        <a href="https://store.ulka.tv/" className="text-white font-medium hover:text-blue-600">STORE</a>
+        <a href="https://ulka.tv/faq" className="text-white font-medium hover:text-blue-600">F.A.Q</a>
+        <a href="https://partners.ulka.tv/" className="text-white font-medium hover:text-blue-600">PARTNER LOGIN</a>
       </div>
-    </div> */}
+    </div>
 
         <div className="container mx-auto flex items-center justify-between">
           <div
@@ -456,20 +456,21 @@ const Home = () => {
                 HOME
               </Link>
             </li>
-            <li className="cursor-pointer py-2 px-4 md:py-0 md:px-0 text-left md:text-center">
+            {/* <li className="cursor-pointer py-2 px-4 md:py-0 md:px-0 text-left md:text-center">
               <Link
                 href="/bouquets"
                 className="inline-block bg-transparent text-white hover:bg-white hover:text-black px-2 py-2 rounded-md font-bold transition-all duration-300"
               >
-                BOUQUETS
+                BOUQ
               </Link>
-            </li>
+            </li> */}
+
             <li className="cursor-pointer py-2 px-4 md:py-0 md:px-0 text-left md:text-center">
               <Link
-                href="/about"
+                href="/pagebouquets"
                 className="inline-block bg-transparent text-white hover:bg-white hover:text-black px-2 py-2 rounded-md font-bold transition-all duration-300"
               >
-                ABOUT US
+                BOUQUETS
               </Link>
             </li>
             <li className="cursor-pointer py-2 px-4 md:py-0 md:px-0 text-left md:text-center">
@@ -478,6 +479,14 @@ const Home = () => {
                 className="inline-block bg-transparent text-white hover:bg-white hover:text-black px-2 py-2 rounded-md font-bold transition-all duration-300"
               >
                 TECHNOLOGY
+              </Link>
+            </li>
+            <li className="cursor-pointer py-2 px-4 md:py-0 md:px-0 text-left md:text-center">
+              <Link
+                href="/about"
+                className="inline-block bg-transparent text-white hover:bg-white hover:text-black px-2 py-2 rounded-md font-bold transition-all duration-300"
+              >
+                ABOUT US
               </Link>
             </li>
             <li className="cursor-pointer py-2 px-4 md:py-0 md:px-0 text-left md:text-center">
