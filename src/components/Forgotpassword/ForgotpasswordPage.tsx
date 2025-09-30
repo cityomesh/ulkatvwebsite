@@ -1,53 +1,3 @@
-// "use client";
-// import { useState } from "react";
-// import Image from "next/image";
-
-// export default function ForgotPasswordPage() {
-//   const [mobile, setMobile] = useState("");
-//   const [userId, setUserId] = useState("");
-
-//   return (
-//     <div className="flex min-h-screen items-center justify-center bg-gray-900">
-//       <div className="w-full max-w-md p-6 bg-black rounded-lg shadow-lg">
-//         <div className="text-center mb-6">
-//           <Image 
-//             src="/tv (2).png" 
-//             alt="ULKA TV Logo" 
-//             width={300} 
-//             height={150} 
-//             className="mx-auto bg-black"
-//           />
-//         </div>
-
-//         <div className="mt-4">
-//           <input
-//             type="tel"
-//             placeholder="Enter mobile number"
-//             className="w-full p-2 bg-transparent text-white border-b border-gray-500 focus:outline-none"
-//             value={mobile}
-//             onChange={(e) => setMobile(e.target.value)}
-//           />
-//         </div>
-
-//         <div className="mt-4">
-//           <input
-//             type="text"
-//             placeholder="Enter user ID"
-//             className="w-full p-2 bg-transparent text-white border-b border-gray-500 focus:outline-none"
-//             value={userId}
-//             onChange={(e) => setUserId(e.target.value)}
-//           />
-//         </div>
-
-//         <button className="w-full mt-5 bg-red-600 text-white py-3 rounded-md hover:bg-red-700 transition">
-//           Get OTP
-//         </button>
-//       </div>
-//     </div>
-//   );
-// }
-
-
 "use client";
 import { useState } from "react";
 import Image from "next/image";
@@ -88,7 +38,8 @@ export default function ForgotPasswordPage() {
       } else {
         setMessage(data.message || "Failed to send OTP.");
       }
-    } catch (error) {
+    } catch (error: any) {
+      console.error(error); // <-- Fixed ESLint error by using the variable
       setMessage("Network error. Please try again.");
     }
 

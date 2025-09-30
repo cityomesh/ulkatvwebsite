@@ -320,7 +320,6 @@
 
 
 
-
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -341,7 +340,6 @@ const Login = () => {
     setSuccess("");
 
     try {
-      // ✅ Hardcoded credentials
       const validUser = "Maintest";
       const validPass = "test@123";
 
@@ -350,13 +348,12 @@ const Login = () => {
         localStorage.setItem("access_token", "dummy_token_12345");
 
         setTimeout(() => {
-          // 🚀 Redirect to Dashboard instead of Home
           router.push("/dashboard");
         }, 1000);
       } else {
         setError("Invalid username or password. Please try again.");
       }
-    } catch (error) {
+    } catch (_error) {
       setError("Something went wrong. Please try again later.");
     } finally {
       setLoading(false);
@@ -416,4 +413,3 @@ const Login = () => {
 };
 
 export default Login;
-
