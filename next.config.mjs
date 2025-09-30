@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {  basePath: '/ulkatvwebsite',
+  reactStrictMode: true,
+};
 
 export default nextConfig;
