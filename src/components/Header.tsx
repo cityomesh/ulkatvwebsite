@@ -456,14 +456,14 @@ const Home = () => {
                 HOME
               </Link>
             </li>
-            {/* <li className="cursor-pointer py-2 px-4 md:py-0 md:px-0 text-left md:text-center">
+            <li className="cursor-pointer py-2 px-4 md:py-0 md:px-0 text-left md:text-center">
               <Link
                 href="/bouquets"
                 className="inline-block bg-transparent text-white hover:bg-white hover:text-black px-2 py-2 rounded-md font-bold transition-all duration-300"
               >
-                BOUQ
+                ALL
               </Link>
-            </li> */}
+            </li>
 
             <li className="cursor-pointer py-2 px-4 md:py-0 md:px-0 text-left md:text-center">
               <Link
