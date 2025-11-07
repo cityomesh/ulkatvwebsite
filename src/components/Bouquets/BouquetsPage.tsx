@@ -1,4 +1,3 @@
-
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -18,6 +17,9 @@ interface BouqueItem {
   rate: Rate[];
 }
 
+// ================================
+// Fetch API Function
+// ================================
 const fetchBouqueData = async (): Promise<BouqueItem[] | null> => {
   try {
     const token = localStorage.getItem("access_token");
@@ -47,22 +49,57 @@ const fetchBouqueData = async (): Promise<BouqueItem[] | null> => {
   }
 };
 
+// ================================
+// Main Component
+// ================================
 const BouquePage = () => {
-  const [bouqueData, setBouqueData] = useState<BouqueItem[]>(() => {
-    const stored = localStorage.getItem("bouqueData");
-    return stored ? JSON.parse(stored) : [];
-  });
-    const [searchQuery, setSearchQuery] = useState("");
-  const [showPriceDetails] = useState<Record<number, boolean>>({});
+  const [bouqueData, setBouqueData] = useState<BouqueItem[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedType, setSelectedType] = useState<"Alacarte" | "Add On" | "Base">("Alacarte");
 
-  // Mapping UI labels to backend values
+  // Type mapping (UI label -> backend type)
   const typeMapping: Record<string, "Alacarte" | "Add On" | "Base"> = {
     Channels: "Alacarte",
     "Broadcaster Packs": "Add On",
     "Ulka Bouquets": "Base",
   };
 
+  // ================================
+  // Load Data (API + localStorage)
+  // ================================
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const storedData = localStorage.getItem("bouqueData");
+        if (storedData) {
+          setBouqueData(JSON.parse(storedData));
+        }
+
+        const data = await fetchBouqueData();
+        if (data) {
+          setBouqueData(data);
+          localStorage.setItem("bouqueData", JSON.stringify(data));
+        }
+      } catch (error) {
+        console.error("Error loading data:", error);
+      }
+    };
+
+    loadData();
+  }, []);
+
+  // ================================
+  // Filter Data
+  // ================================
+  const filteredBouqueData = bouqueData.filter(
+    (item) =>
+      item.type_lbl.toLowerCase().replace(/\s+/g, "") === selectedType.toLowerCase().replace(/\s+/g, "") &&
+      item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  // ================================
+  // Channel Images Map
+  // ================================
   const channelImages: Record<string, string> = {
     "CHITTI TV": "/CHITTI TV .jpeg",
     "NTV": "/NTV.png",
@@ -225,63 +262,29 @@ const BouquePage = () => {
     "UDAYA TV HD": "/UDAYA TV HD.png",
     "ABN": "/ABN.png",
   };
-  
-  useEffect(() => {
-    console.log("Selected Type:", selectedType);
-    console.log(
-      "Filtered Data:",
-      bouqueData.filter((item) => item.type_lbl.toLowerCase() === selectedType.toLowerCase())
-    );
-  }, [selectedType, bouqueData]);
 
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const storedData = localStorage.getItem("bouqueData");
-        if (storedData) {
-          setBouqueData(JSON.parse(storedData));
-        }
-  
-        const data = await fetchBouqueData();
-        if (data) {
-          setBouqueData(data);
-          localStorage.setItem("bouqueData", JSON.stringify(data));
-        }
-      } catch (error) {
-        console.error("డేటా తీసుకొడంలో లోపం:", error);
-      }
-    };
-  
-    loadData();
-  }, []);
-  
-  // const togglePriceDetails = (id: number) => {
-  //   setShowPriceDetails((prev) => ({
-  //     ...prev,
-  //     [id]: !prev[id],
-  //   }));
-  // };
-
-  const filteredBouqueData = bouqueData.filter(
-    (item) =>
-      item.type_lbl.toLowerCase().replace(/\s+/g, "") === selectedType.toLowerCase().replace(/\s+/g, "") &&
-      item.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
+  // ================================
+  // JSX
+  // ================================
   return (
-    <div className="p-6 sm:p-10 md:p-40 bg-white text-black">
-      <div className="text-center">
-        <h1 className="text-2xl font-bold text-center mb-6">Available TV Bouquets</h1>
-        <p className="text-gray-500 text-xl mt-2 font-bold mb-6">View all the broadcaster packs available on ULKA TV</p>
+    <div className="p-6 sm:p-10 md:p-20 bg-white text-black min-h-screen">
+      <div className="text-center mb-10">
+        <h1 className="text-2xl font-bold mb-2 mt-[5rem]">Available TV Bouquets</h1>
+        <p className="text-gray-500 text-lg font-semibold">
+          View all the broadcaster packs available on ULKA TV
+        </p>
       </div>
 
-      <div className="flex justify-center mb-6 space-x-4">
+      {/* Filter Buttons */}
+      <div className="flex justify-center flex-wrap gap-4 mb-6">
         {["Channels", "Broadcaster Packs", "Ulka Bouquets"].map((label) => (
           <button
             key={label}
             onClick={() => setSelectedType(typeMapping[label])}
-            className={`px-4 py-2 rounded-md text-lg font-medium ${
-              selectedType === typeMapping[label] ? "bg-black text-white" : "bg-red-500 text-black"
+            className={`px-4 py-2 rounded-md text-lg font-medium transition-colors duration-200 ${
+              selectedType === typeMapping[label]
+                ? "bg-black text-white"
+                : "bg-gray-200 text-black hover:bg-gray-300"
             }`}
           >
             {label}
@@ -289,69 +292,53 @@ const BouquePage = () => {
         ))}
       </div>
 
-      <div className="relative w-full mb-8">
-        <FaSearch className="absolute left-3 top-3 text-black" />
+      {/* Search Bar */}
+      <div className="relative w-full sm:w-1/2 mx-auto mb-8">
+        <FaSearch className="absolute left-3 top-3 text-gray-500" />
         <input
           type="text"
           placeholder="Search channel..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full p-2 pl-10 border rounded-md"
+          className="w-full p-2 pl-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
         />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4 mt-[2rem]">
-        {filteredBouqueData.map((item) => (
-          <div key={item.id} className="p-3 rounded-lg shadow text-center relative bg-white">
-            <p className="font-semibold text-sm mb-2">{item.name}</p>
+      {/* Channel Grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-6">
+        {filteredBouqueData.length > 0 ? (
+          filteredBouqueData.map((item) => (
+            <div key={item.id} className="p-3 rounded-lg shadow-md text-center bg-white border hover:shadow-lg transition">
+              <p className="font-semibold text-sm mb-2">{item.name}</p>
 
-            <div className="relative w-full flex justify-center">
-            <Image
-              src={selectedType === "Alacarte" ? channelImages[item.name] || "/images/default.jpg" : ""}
-              alt={item.name}
-              width={150}
-              height={100}
-              className={`rounded-md mb-2 ${selectedType !== "Alacarte" ? "hidden" : ""}`}
-            />
+              {selectedType === "Alacarte" && (
+                <Image
+                  src={channelImages[item.name] || "/default.jpg"}
+                  alt={item.name}
+                  width={150}
+                  height={100}
+                  className="rounded-md mx-auto mb-3"
+                />
+              )}
 
-              {/* <FaInfoCircle
-                className="absolute top-2 right-2 text-black cursor-pointer"
-                onClick={() => togglePriceDetails(item.id)}
-              /> */}
+              {/* Price Display */}
+              {(() => {
+                const oneMonthRate = item.rate.find((rate) => rate.months === 1);
+                return oneMonthRate ? (
+                  <p className="text-sm text-gray-700 font-medium">
+                    ₹{parseFloat(oneMonthRate.mrpPrice).toFixed(2)} / month
+                  </p>
+                ) : (
+                  <p className="text-sm text-red-500">MRP not available</p>
+                );
+              })()}
             </div>
-
-            {/* {item.rate.length > 0 && (
-                <p className="mt-2 text-sm font-medium">
-                  MRP: {Number(item.rate[0].drp).toFixed(0)} ₹ / per month
-                </p>
-              )} */}
-
-
-{(() => {
-  const oneMonthRate = item.rate.find(rate => rate.months === 1);
-  return oneMonthRate ? (
-    <p className="text-sm text-gray-700 font-medium">
-      ₹{parseFloat(oneMonthRate.mrpPrice).toFixed(2)} / per month
-    </p>
-  ) : (
-    <p className="text-sm text-red-500">MRP for 1 month not available</p>
-  );
-})()}
-
-
-            {showPriceDetails[item.id] && item.rate.length > 1 && (
-              <div className="bg-gray-100 p-2 rounded-lg shadow">
-                {item.rate.map((rate) =>
-                  rate.months !== 1 ? (
-                    <p key={rate.id} className="text-sm">
-                      {rate.months} Months Price: ₹{rate.drp}
-                    </p>
-                  ) : null
-                )}
-              </div>
-            )}
-          </div>
-        ))}
+          ))
+        ) : (
+          <p className="text-center col-span-full text-gray-500 font-medium">
+            No bouquets found.
+          </p>
+        )}
       </div>
     </div>
   );
